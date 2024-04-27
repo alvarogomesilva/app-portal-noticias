@@ -19,7 +19,7 @@ async function main() {
             email: 'alvaro@gmail.com',
             phone: '(47) 9 9999-9999',
             password: hashSync('123', 8),
-            avatar: '',
+            avatar: null,
             roleId: 1
         }
     })

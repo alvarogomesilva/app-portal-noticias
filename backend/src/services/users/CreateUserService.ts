@@ -1,3 +1,6 @@
+import { Prisma } from "../../prisma";
+import { hashSync } from "bcryptjs";
+
 
 interface IUser {
     name: string;
@@ -18,6 +21,24 @@ export const CreateUserService = async ({
     avatar,
     roleId }: IUser) => {
 
+    if (!name) return { message: 'Name is required!' }
+    if (!lastname) return { message: 'LastName is required!' }
+    if (!email) return { message: 'Email is required!' }
+    if (!phone) return { message: 'Phone is required!' }
+    if (!password) return { message: 'Password is required!' }
+    if (!roleId) return { message: 'Type User is required!' }
 
-    return { ok: true }
+    const userAlredyExists = await Prisma.user.findFirst({
+        where: { email: email }
+    })
+
+    if (userAlredyExists) return { message: 'User alredy exists!' }
+
+    const passwordHash = hashSync(password, 8)
+
+    const user = await Prisma.user.create({
+        data: { name, lastname, email, phone, password: passwordHash, roleId }
+    })
+
+    return user
 }
