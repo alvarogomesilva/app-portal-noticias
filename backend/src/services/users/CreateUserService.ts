@@ -37,7 +37,8 @@ export const CreateUserService = async ({
     const passwordHash = hashSync(password, 8)
 
     const user = await Prisma.user.create({
-        data: { name, lastname, email, phone, password: passwordHash, roleId }
+        data: { name, lastname, email, phone, password: passwordHash, roleId },
+        select: { id: true, name: true, lastname: true, email: true, phone: true, roleId: true }
     })
 
     return user
