@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 export const Navbar = () => {
     return (
@@ -12,7 +13,7 @@ export const Navbar = () => {
                             <li><a href="#" className="text-white">Home</a></li>
                             <li><a href="#" className="text-white">Noticias</a></li>
                             <li><a href="#" className="text-white">Contato</a></li>
-                            <li className="border-2 px-4 py-1 rounded"><a href="#" className="text-white">Login</a></li>
+                            <li className="border-2 px-4 py-1 rounded"><Link to="/login" className="text-white">Login</Link></li>
                         </ul>
                     </div>
                     <div className="md:hidden">
