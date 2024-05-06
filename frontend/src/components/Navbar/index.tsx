@@ -35,9 +35,6 @@ export const Navbar = () => {
 
                                             <div className=" flex flex-col items-center justify-center">
                                                 <img className="inline-block size-[46px] rounded-full" src="https://sujeitoprogramador.com/steve.png" alt="" />
-                                                <div className="font-medium dark:text-white">
-                                                    <span className="text-sm text-gray-500 dark:text-gray-400">{user.name}</span>
-                                                </div>
                                             </div>
 
                                         </li>
