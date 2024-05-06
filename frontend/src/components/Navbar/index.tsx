@@ -1,6 +1,20 @@
 import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "../../types";
+import { logout } from "../../store/user/action";
+import { AppDispatch } from "../../store/store";
+
 
 export const Navbar = () => {
+
+    const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
+    const user = useSelector((state: RootState) => state.user.currentUser)
+    const dispatch = useDispatch<AppDispatch>();
+
+    function handleLogout() {
+        dispatch(logout())
+    }
+
     return (
         <header className="bg-blue-900">
             <nav className="container mx-auto px-6 py-4">
@@ -13,12 +27,31 @@ export const Navbar = () => {
                             <li><a href="#" className="text-white">Home</a></li>
                             <li><a href="#" className="text-white">Noticias</a></li>
                             <li><a href="#" className="text-white">Contato</a></li>
-                            <li className="border-2 px-4 py-1 rounded"><Link to="/login" className="text-white">Login</Link></li>
+                            {
+                                isAuthenticated ? (
+                                    <>
+                                    <li ><Link to="/login" className="text-white" onClick={handleLogout}>Sair</Link></li>
+                                        <li>
+
+                                            <div className=" flex flex-col items-center justify-center">
+                                                <img className="inline-block size-[46px] rounded-full" src="https://sujeitoprogramador.com/steve.png" alt="" />
+                                                <div className="font-medium dark:text-white">
+                                                    <span className="text-sm text-gray-500 dark:text-gray-400">{user.name}</span>
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                        
+                                    </>
+                                ) : (
+                                    <li className="border-2 px-4 py-1 rounded"><Link to="/login" className="text-white">Login</Link></li>
+                                )
+                            }
                         </ul>
                     </div>
                     <div className="md:hidden">
                         <button className="outline-none mobile-menu-button">
-                            <svg className="w-6 h-6 text-white" x-show="!showMenu" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <svg className="w-6 h-6 text-white" x-show="!showMenu" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path d="M4 6h16M4 12h16M4 18h16"></path>
                             </svg>
                         </button>
