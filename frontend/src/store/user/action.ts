@@ -12,9 +12,11 @@ export const login = (inputs: Inputs) => async (dispatch: Dispatch) => {
   try {
     const request = await api.post('/login', inputs)
     const { token } = request.data
-    localStorage.setItem('@u', token);
-    dispatch(setUser(request.data))
-    dispatch(setToken(token));
+    if (token !== undefined) {
+      localStorage.setItem('@u', token);
+      dispatch(setUser(request.data))
+      dispatch(setToken(token));
+    }
     
   } catch (error) {
     console.error('Erro de autenticação:', error);
@@ -35,8 +37,8 @@ export const fetchUser = () => async (dispatch: Dispatch) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    dispatch(setUser(response.data))
     dispatch(setIsAutenticated())
+    dispatch(setUser(response.data))
   } catch (error) {
     
     console.error('Erro ao buscar usuário:', error);

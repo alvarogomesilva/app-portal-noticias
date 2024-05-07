@@ -14,19 +14,23 @@ export default function AuthPage() {
         password: ""
     })
 
-    const handleLogin = (e: FormEvent) => {
-        e.preventDefault()
-        setLoading(true)
+    const handleLogin = async (e: FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
         try {
-            dispatch(login(inputs));
-            navigate('/');
+            await dispatch(login(inputs));
+            // Se o login for bem-sucedido, redirecione para a página inicial
+            if (localStorage.getItem('@u')) {
+                navigate('/');
+
+            }
         } catch (error) {
             console.error('Erro de login:', error);
+            // Se ocorrer um erro, mantenha o usuário na página de login
+            // Não é necessário fazer nada aqui, o usuário permanecerá na mesma página
+        } finally {
+            setLoading(false);
         }
-        finally {
-            setLoading(false)
-        }
-
     }
 
     return (

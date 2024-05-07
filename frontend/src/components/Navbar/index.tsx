@@ -24,21 +24,21 @@ export const Navbar = () => {
                     </div>
                     <div className="hidden md:block">
                         <ul className="flex items-center space-x-8">
-                            <li><a href="#" className="text-white">Home</a></li>
+                            <li><Link to="/" className="text-white">Home</Link></li>
                             <li><a href="#" className="text-white">Noticias</a></li>
                             <li><a href="#" className="text-white">Contato</a></li>
                             {
                                 isAuthenticated ? (
                                     <>
-                                    <li ><Link to="/login" className="text-white" onClick={handleLogout}>Sair</Link></li>
+                                        <li ><Link to="/login" className="text-white" onClick={handleLogout}>Sair</Link></li>
                                         <li>
 
-                                            <div className=" flex flex-col items-center justify-center">
+                                            <Link to="/perfil"><div className=" flex flex-col items-center justify-center">
                                                 <img className="inline-block size-[46px] rounded-full" src="https://sujeitoprogramador.com/steve.png" alt="" />
-                                            </div>
+                                            </div></Link>
 
                                         </li>
-                                        
+
                                     </>
                                 ) : (
                                     <li className="border-2 px-4 py-1 rounded"><Link to="/login" className="text-white">Login</Link></li>

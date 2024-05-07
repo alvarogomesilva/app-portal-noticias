@@ -1,49 +1,42 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUser } from "./store/user/action";
+import { RootState } from "./types";
+
+import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
-import { useEffect, useState } from "react";
-import { useDispatch } from 'react-redux';
-import { fetchUser } from "./store/user/action";
 import { AppDispatch } from "./store/store";
+import { Loading } from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
-  const [loading, setLoading] = useState(true)
+  const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
-    async function loadStorage() {
-      setTimeout(() => {
-        const token = localStorage.getItem('@u')
-        try {
-          if (token) {
-            dispatch(fetchUser());
-              setLoading(false)
-            }
-        
-        } catch (error) {
-          console.log(error)
-        }
-        finally {
-          setLoading(false)
-        }
-      }, 500);
-     
+    async function checkAuthentication() {
+      const token = localStorage.getItem('@u');
+      if (token) {
+        await dispatch(fetchUser());
+      }
+      setLoading(false);
     }
 
-    loadStorage()
+    checkAuthentication();
   }, [dispatch]);
 
   if (loading) {
-    return <div>Carregando...</div>
+    return <Loading/>
   }
-
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<AuthPage />} />
+        <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <AuthPage />} />
+        <Route path="/perfil" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
       </Routes>
     </BrowserRouter>
   );
