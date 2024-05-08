@@ -34,7 +34,7 @@ export const Navbar = () => {
                                         <li>
 
                                             <Link to="/perfil"><div className=" flex flex-col items-center justify-center">
-                                                <img className="inline-block size-[46px] rounded-full" src="https://sujeitoprogramador.com/steve.png" alt="" />
+                                                <img className="w-8 h-8 object-cover rounded-full" src="https://sujeitoprogramador.com/steve.png" alt="" />
                                             </div></Link>
 
                                         </li>

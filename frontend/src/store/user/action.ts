@@ -1,14 +1,10 @@
 import { Dispatch } from 'redux';
 import { setToken, clearToken, setIsAutenticated, setUser } from './reducer';
 import { api } from '../../api';
-
-interface Inputs {
-  email: string;
-  password: string;
-}
+import { TLogin } from '../../types';
 
 
-export const login = (inputs: Inputs) => async (dispatch: Dispatch) => {
+export const login = (inputs: TLogin) => async (dispatch: Dispatch) => {
   try {
     const request = await api.post('/login', inputs)
     const { token } = request.data

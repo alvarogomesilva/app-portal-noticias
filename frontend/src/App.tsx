@@ -8,7 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import { AppDispatch } from "./store/store";
-import { Loading } from "./components/Loading";
+import { ScreenLoading } from "./components/ScreenLoading";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -28,7 +28,7 @@ function App() {
   }, [dispatch]);
 
   if (loading) {
-    return <Loading/>
+    return <ScreenLoading/>
   }
 
   return (

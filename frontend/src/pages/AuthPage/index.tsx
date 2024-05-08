@@ -19,15 +19,12 @@ export default function AuthPage() {
         setLoading(true);
         try {
             await dispatch(login(inputs));
-            // Se o login for bem-sucedido, redirecione para a página inicial
             if (localStorage.getItem('@u')) {
                 navigate('/');
 
             }
         } catch (error) {
             console.error('Erro de login:', error);
-            // Se ocorrer um erro, mantenha o usuário na página de login
-            // Não é necessário fazer nada aqui, o usuário permanecerá na mesma página
         } finally {
             setLoading(false);
         }

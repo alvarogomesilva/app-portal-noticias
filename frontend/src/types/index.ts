@@ -2,16 +2,28 @@ export type RootState = {
     user: TUser
 }
 
+
 // Types User
-export type TAction = {
-    type: 'user/login';
-    payload: {
-        userId: string;
-    };
-};
+
+export type UserState = {
+    token: string | null;
+    isAuthenticated: boolean;
+    currentUser: object;
+}
+
+export type TCurrentUser = {
+    id: string;
+    name: string;
+    lastname: string;
+    email: string;
+    phone: string;
+    photo: string;
+    roleId: number;
+}
 
 export type TUser = {
-    currentUser: object | null;
+    token: null | string;
+    currentUser: TCurrentUser | null;
     isAuthenticated: boolean;
 }
 

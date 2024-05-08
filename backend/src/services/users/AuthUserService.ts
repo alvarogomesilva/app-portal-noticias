@@ -30,6 +30,8 @@ export const AuthUserService = async ({ email, password }: IUser) => {
     return { 
         id: userExists.id, 
         name: userExists.name, 
+        lastname: userExists.lastname,
+        phone: userExists.phone,
         email: userExists.email,
         avatar: userExists.avatar,
         token: token, 

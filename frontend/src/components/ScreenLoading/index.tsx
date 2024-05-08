@@ -1,4 +1,4 @@
-export const Loading = () => {
+export const ScreenLoading = () => {
     return (
         <div className="grid min-h-[140px] w-full place-items-center rounded-lg p-6 lg:overflow-visible">
         <svg className="w-16 h-16 animate-spin text-gray-900/50" viewBox="0 0 64 64" fill="none"
