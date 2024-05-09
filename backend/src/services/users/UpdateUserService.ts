@@ -24,14 +24,15 @@ export const UpdateUserService = async ({ name, lastname, email, phone, avatar, 
         select: { avatar: true }
     })
 
-    if (avatarAlredyExists.avatar !== null && avatar !== '') {
+    if (avatarAlredyExists.avatar !== null && avatar) {
         await unlink(resolve(__dirname, '..', '..', '..', 'uploads', avatarAlredyExists.avatar))
     }
 
     
     const user = await Prisma.user.update({
         data: { name, lastname, email, phone, avatar },
-        where: { id: userId }
+        where: { id: userId },
+        select: { id: true, lastname: true, name: true, email: true, phone: true, avatar: true, roleId: true }
     })
 
     return user

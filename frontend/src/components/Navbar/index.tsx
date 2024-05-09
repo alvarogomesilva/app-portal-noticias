@@ -3,18 +3,28 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../types";
 import { logout } from "../../store/user/action";
 import { AppDispatch } from "../../store/store";
+import { useEffect, useState } from "react";
 
 
 export const Navbar = () => {
 
     const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
     const user = useSelector((state: RootState) => state.user.currentUser)
-    const dispatch = useDispatch<AppDispatch>();
+    const [avatar, setAvatar] = useState<string>("");
 
+    // Use o useEffect para atualizar a URL da imagem quando o usuário mudar
+    useEffect(() => {
+        if (user?.avatar) {
+            setAvatar(`http://localhost:3000/files/${user.avatar}`);
+        } else {
+            setAvatar(""); // Se não houver avatar, defina como uma string vazia
+        }
+    }, [user]);
+
+    const dispatch = useDispatch<AppDispatch>();
     function handleLogout() {
         dispatch(logout())
     }
-
     return (
         <header className="bg-blue-900">
             <nav className="container mx-auto px-6 py-4">
@@ -34,7 +44,7 @@ export const Navbar = () => {
                                         <li>
 
                                             <Link to="/perfil"><div className=" flex flex-col items-center justify-center">
-                                                <img className="w-8 h-8 object-cover rounded-full" src="https://sujeitoprogramador.com/steve.png" alt="" />
+                                                <img className="w-10 h-10 p-1 object-cover rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src={avatar || "https://images.unsplash.com/photo-1531316282956-d38457be0993?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"} alt="" />
                                             </div></Link>
 
                                         </li>

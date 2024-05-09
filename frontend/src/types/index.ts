@@ -17,7 +17,7 @@ export type TCurrentUser = {
     lastname: string;
     email: string;
     phone: string;
-    photo: string;
+    avatar: string;
     roleId: number;
 }
 

@@ -1,37 +1,65 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navbar } from "../../components/Navbar";
 import { RootState } from "../../types";
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
+import { AppDispatch } from "../../store/store";
+import { updateUser } from "../../store/user/action";
 
 export default function ProfilePage() {
+    const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((state: RootState) => state.user.currentUser);
     const ref = useRef<HTMLInputElement>(null);
     const [photoProfile, setPhotoProfile] = useState<string | null>(null);
+    const [avatar, setAvatar] = useState<File | null>(null);
     const [inputs, setInputs] = useState({
         name: user?.name || "",
         lastname: user?.lastname || "",
         email: user?.email || "",
         phone: user?.phone || "",
-        photo: user?.photo || ""
+        avatar: user?.avatar
     });
+    const [isUpdating, setIsUpdating] = useState(false);
 
     const previewProfile = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
+        setAvatar(file)
         if (file) {
             const reader = new FileReader();
-            reader.onload = (e) => {
-                if (e.target?.result) {
-                    setPhotoProfile(e.target.result as string);
+            reader.onload = () => {
+                if (reader.readyState === 2) {
+                    setPhotoProfile(reader.result as string);
                 }
             };
             reader.readAsDataURL(file);
         }
     };
 
+    const handleUpdateUser = async (e: FormEvent) => {
+        e.preventDefault();
+        setIsUpdating(true);
+
+        const formData = new FormData();
+        formData.append('name', inputs.name);
+        formData.append('lastname', inputs.lastname);
+        formData.append('email', inputs.email);
+        formData.append('phone', inputs.phone);
+        if (avatar) {
+            formData.append('avatar', avatar);
+        }
+
+        try {
+            await dispatch(updateUser(formData));
+        } catch (error) {
+            console.error('Erro ao atualizar usuário:', error);
+        } finally {
+            setIsUpdating(false);
+        }
+    }
+
     return (
         <>
             <Navbar />
-            <form className="max-w-2xl mx-auto">
+            <form className="max-w-2xl mx-auto" encType="multipart/form-data">
                 <div className="my-9">
                     <div className="text-center">
                         <div className="mt-2">
@@ -42,9 +70,13 @@ export default function ProfilePage() {
                                 onChange={previewProfile}
                             />
                             <img
-                                src={photoProfile || user?.photo || "https://images.unsplash.com/photo-1531316282956-d38457be0993?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"}
+                                src={
+                                    photoProfile ||
+                                    (inputs.avatar !== null ? `http://localhost:3000/files/${user?.avatar}` : null) ||
+                                    "https://images.unsplash.com/photo-1531316282956-d38457be0993?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"
+                                }
                                 alt="Profile"
-                                className="w-40 h-40 m-auto rounded-full shadow object-cover"
+                                className="w-40 h-40 m-auto rounded-full object-cover"
                             />
                         </div>
                         <button
@@ -101,10 +133,11 @@ export default function ProfilePage() {
                     </div>
                 </div>
                 <button
-                    type="submit"
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    onClick={handleUpdateUser}
+                    disabled={isUpdating}
                 >
-                    Atualizar
+                    {isUpdating ? 'Atualizando...' : 'Atualizar'}
                 </button>
             </form>
         </>
