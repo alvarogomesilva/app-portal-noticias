@@ -9,10 +9,13 @@ import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
 import { AppDispatch } from "./store/store";
 import { ScreenLoading } from "./components/ScreenLoading";
+import ActionPage from "./pages/ActionPage";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import NewUserPage from "./pages/NewUserPage";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
-  const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
+  const user = useSelector((state: RootState) => state.user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,15 +31,36 @@ function App() {
   }, [dispatch]);
 
   if (loading) {
-    return <ScreenLoading/>
+    return <ScreenLoading />
   }
+
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <AuthPage />} />
-        <Route path="/perfil" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
+        <Route 
+          path="/" 
+          element={<HomePage />} 
+        
+        />
+        <Route 
+          path="/login" 
+            element={user.isAuthenticated ? <Navigate to="/" /> : <AuthPage />} 
+          />
+
+        <Route
+          path="/perfil"
+          element={user.isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />}
+        />
+
+        <Route
+          path="/actions"
+          element={<ProtectedRoute element={<ActionPage />} permissions={[1, 2]} />}
+        />
+        <Route
+          path="/new-user"
+          element={<ProtectedRoute element={<NewUserPage />} permissions={[1]} />}
+        />
       </Routes>
     </BrowserRouter>
   );

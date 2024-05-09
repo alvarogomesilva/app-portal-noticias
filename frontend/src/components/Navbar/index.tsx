@@ -12,13 +12,13 @@ export const Navbar = () => {
     const user = useSelector((state: RootState) => state.user.currentUser)
     const [avatar, setAvatar] = useState<string>("");
 
-    // Use o useEffect para atualizar a URL da imagem quando o usuário mudar
     useEffect(() => {
         if (user?.avatar) {
             setAvatar(`http://localhost:3000/files/${user.avatar}`);
         } else {
-            setAvatar(""); // Se não houver avatar, defina como uma string vazia
+            setAvatar("");
         }
+
     }, [user]);
 
     const dispatch = useDispatch<AppDispatch>();
@@ -27,7 +27,7 @@ export const Navbar = () => {
     }
     return (
         <header className="bg-blue-900">
-            <nav className="container mx-auto px-6 py-4">
+            <nav className="container mx-auto px-6 py-6">
                 <div className="flex items-center justify-between">
                     <div className="text-white font-bold text-xl">
                         <a href="#">Logo</a>
@@ -36,7 +36,16 @@ export const Navbar = () => {
                         <ul className="flex items-center space-x-8">
                             <li><Link to="/" className="text-white">Home</Link></li>
                             <li><a href="#" className="text-white">Noticias</a></li>
+
                             <li><a href="#" className="text-white">Contato</a></li>
+                            {user.roleId === 1
+                                &&
+                                <li ><Link to="/actions" className="text-white">Administrador</Link></li>
+                            }
+                            {user.roleId === 2
+                                &&
+                                <li ><Link to="/actions" className="text-white">Manutenção</Link></li>}
+
                             {
                                 isAuthenticated ? (
                                     <>
@@ -45,7 +54,8 @@ export const Navbar = () => {
 
                                             <Link to="/perfil"><div className=" flex flex-col items-center justify-center">
                                                 <img className="w-10 h-10 p-1 object-cover rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src={avatar || "https://images.unsplash.com/photo-1531316282956-d38457be0993?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"} alt="" />
-                                            </div></Link>
+                                            </div>
+                                            </Link>
 
                                         </li>
 
