@@ -26,7 +26,7 @@ export default function ActionPage() {
                             <h3>Gerenciamento de Usuários</h3>
                             <ul>
                                 <li><Link to="/new-user">Cadastrar usuário</Link></li>
-                                <li><a href="#">Editar usuário</a></li>
+                                <li><Link to="/list-user">Editar usuário</Link></li>
                             </ul>
                         </div>
                     </div>

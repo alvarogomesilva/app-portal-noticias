@@ -12,6 +12,8 @@ import { ScreenLoading } from "./components/ScreenLoading";
 import ActionPage from "./pages/ActionPage";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import NewUserPage from "./pages/NewUserPage";
+import EditUserPage from "./pages/EditUserPage";
+import ListUserPage from "./pages/ListUserPage";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -60,6 +62,16 @@ function App() {
         <Route
           path="/new-user"
           element={<ProtectedRoute element={<NewUserPage />} permissions={[1]} />}
+        />
+
+        <Route
+          path="/list-user"
+          element={<ProtectedRoute element={<ListUserPage />} permissions={[1]} />}
+        />
+
+        <Route
+          path="/edit-user"
+          element={<ProtectedRoute element={<EditUserPage />} permissions={[1]} />}
         />
       </Routes>
     </BrowserRouter>
