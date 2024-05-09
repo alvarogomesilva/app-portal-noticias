@@ -58,3 +58,13 @@ export const updateUser = (formData: FormData) => async (dispatch: Dispatch) => 
     console.error('Erro ao atualizar usuário:', error);
   }
 };
+
+export const createUser = (inputs, roleId) => async (dispatch: Dispatch) => {
+  const { name, lastname, email, password,  phone } = inputs
+  
+  try {
+    const response = await api.post('/user', {name, lastname, email, phone, password, roleId})
+  } catch (error) {
+    console.log(error)
+  }
+}
