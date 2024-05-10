@@ -4,6 +4,8 @@ import { RootState } from "../../types";
 import { FormEvent, useRef, useState } from "react";
 import { AppDispatch } from "../../store/store";
 import { updateUser } from "../../store/user/action";
+import { SubmitLoading } from "../../components/SubmitLoading";
+import toast from "react-hot-toast";
 
 export default function ProfilePage() {
     const dispatch = useDispatch<AppDispatch>();
@@ -49,6 +51,7 @@ export default function ProfilePage() {
 
         try {
             await dispatch(updateUser(formData));
+            toast.success("Atualizado com sucesso!")
         } catch (error) {
             console.error('Erro ao atualizar usuário:', error);
         } finally {
@@ -133,11 +136,11 @@ export default function ProfilePage() {
                     </div>
                 </div>
                 <button
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
                     onClick={handleUpdateUser}
                     disabled={isUpdating}
                 >
-                    {isUpdating ? 'Atualizando...' : 'Atualizar'}
+                    {isUpdating ? <SubmitLoading /> : 'Atualizar'}
                 </button>
             </form>
         </>

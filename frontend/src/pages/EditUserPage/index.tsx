@@ -5,6 +5,7 @@ import { api } from "../../api";
 import { updateUsers } from "../../store/user/action";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
+import toast from "react-hot-toast";
 
 type Roles = {
     id: number;
@@ -85,6 +86,7 @@ export default function EditUserPage() {
 
         try {
             dispatch(updateUsers(inputs, selectedRole))
+            toast.success("Atualizado com sucesso!")
         } catch (error) {
             console.log(error)
         }

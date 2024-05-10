@@ -40,7 +40,7 @@ export default function AuthPage() {
             <Navbar />
 
             <div className="w-full bg-gray-50 flex flex-col sm:justify-center items-center pt-9">
-                <div className="w-full sm:max-w-sm p-5 mx-auto pt-9">
+                <div className="w-full sm:max-w-sm p-5 mx-auto pt-9 border rounded-md">
                     <h2 className="mb-6 text-center flex justify-center text-3xl font-bold text-blue-900">
                         <FaBlog size={60} />
                     </h2>

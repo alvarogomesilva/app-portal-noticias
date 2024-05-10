@@ -4,6 +4,8 @@ import { api } from "../../api"
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { createUser } from "../../store/user/action";
+import toast from "react-hot-toast";
+import { SubmitLoading } from "../../components/SubmitLoading";
 
 type Roles = {
     id: number;
@@ -44,6 +46,10 @@ export default function NewUserPage() {
     const handleCreateUser = async (e: FormEvent) => {
         e.preventDefault()
 
+        if (!inputs.email || !inputs.name || !inputs.lastname || !inputs.phone || selectedRole === null) {
+            return toast.error("Preencha todos os campos!")
+        }
+
         dispatch(createUser(inputs, selectedRole))
         setInputs({
             name: "",
@@ -53,7 +59,7 @@ export default function NewUserPage() {
             password: "123"
         })
         setSelectedRole(null)
-        console.log('Cadastrado com sucesso!')
+        toast.success("Criado com sucesso!")
     }
 
     const handleRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -124,11 +130,11 @@ export default function NewUserPage() {
                     </select>
                 </div>
                 <button
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    className="text-white bg-blue-700 hover:bg-blue-800  focus:outline-none font-medium rounded-lg text-sm sm:w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
                     onClick={handleCreateUser}
                     disabled={isLoading}
                 >
-                    {isLoading ? 'Cadastrando...' : 'Cadastrar'}
+                    {isLoading ? <SubmitLoading /> : 'Cadastrar'}
                 </button>
             </form>
         </>

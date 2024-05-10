@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { setToken, clearToken, setIsAutenticated, setUser } from './reducer';
 import { api } from '../../api';
 import { TLogin } from '../../types';
-
+import { getToken } from '../../utils';
 
 export const login = (inputs: TLogin) => async (dispatch: Dispatch) => {
   try {
@@ -44,14 +44,14 @@ export const fetchUser = () => async (dispatch: Dispatch) => {
 
 export const updateUser = (formData: FormData) => async (dispatch: Dispatch) => {
   try {
-    const token = localStorage.getItem('@u'); // Obtenha o token do localStorage
-    const response = await api.put('/user', formData, { // Assuma que você está usando uma rota PUT '/user' para atualizar os dados do usuário no servidor
+    const token = getToken()
+    const response = await api.put('/user', formData, { 
       headers: {
-        Authorization: `Bearer ${token}`, // Inclua o token de autorização nos cabeçalhos da solicitação
-        'Content-Type': 'multipart/form-data' // Defina o tipo de conteúdo como 'multipart/form-data'
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data' 
       },
     });
-    // Após uma atualização bem-sucedida no servidor, atualize os dados do usuário no estado Redux
+
     dispatch(setUser(response.data)); 
   } catch (error) {
     console.error('Erro ao atualizar usuário:', error);
@@ -73,7 +73,7 @@ export const updateUsers = (inputs, roleId) => async (dispatch: Dispatch) => {
   const { idUser, name, lastname, email, password,  phone } = inputs
   
   try {
-    const token = localStorage.getItem('@u')
+    const token = getToken()
     const response = await api.put('/user', {idUser, name, lastname, email, phone, password, roleId}, {
       headers: {
         Authorization: `Bearer ${token}`
