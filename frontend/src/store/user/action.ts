@@ -28,7 +28,7 @@ export const logout = () => (dispatch: Dispatch) => {
 export const fetchUser = () => async (dispatch: Dispatch) => {
   try {
     const token = localStorage.getItem('@u');
-    const response = await api.get('/user', {
+    const response = await api.get('/me', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -53,17 +53,33 @@ export const updateUser = (formData: FormData) => async (dispatch: Dispatch) => 
     });
     // Após uma atualização bem-sucedida no servidor, atualize os dados do usuário no estado Redux
     dispatch(setUser(response.data)); 
-    console.log(response.data)
   } catch (error) {
     console.error('Erro ao atualizar usuário:', error);
   }
 };
+
 
 export const createUser = (inputs, roleId) => async (dispatch: Dispatch) => {
   const { name, lastname, email, password,  phone } = inputs
   
   try {
     const response = await api.post('/user', {name, lastname, email, phone, password, roleId})
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const updateUsers = (inputs, roleId) => async (dispatch: Dispatch) => {
+  const { idUser, name, lastname, email, password,  phone } = inputs
+  
+  try {
+    const token = localStorage.getItem('@u')
+    const response = await api.put('/user', {idUser, name, lastname, email, phone, password, roleId}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    console.log('Deu certo!')
   } catch (error) {
     console.log(error)
   }

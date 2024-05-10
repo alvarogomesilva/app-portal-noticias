@@ -8,7 +8,7 @@ export class UpdateUserController {
     async handle(req: Request, res: Response) {
         try {
             const userId = req.userId;
-            const { name, lastname, email, phone } = req.body;
+            const {idUser, name, lastname, email, phone, roleId } = req.body;
             
             let avatar: string | undefined;
 
@@ -23,7 +23,7 @@ export class UpdateUserController {
                 await unlink(req.file.path);
             } 
 
-            const user = await UpdateUserService({ name, lastname, email, phone, avatar, userId });
+            const user = await UpdateUserService({idUser, name, lastname, email, phone, avatar, userId, roleId });
 
             return res.json(user);
         } catch (error) {

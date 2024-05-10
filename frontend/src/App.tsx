@@ -70,7 +70,7 @@ function App() {
         />
 
         <Route
-          path="/edit-user"
+          path="/edit-user/:userId"
           element={<ProtectedRoute element={<EditUserPage />} permissions={[1]} />}
         />
       </Routes>

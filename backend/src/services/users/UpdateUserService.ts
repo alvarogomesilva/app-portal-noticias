@@ -3,16 +3,17 @@ import { Prisma } from "../../prisma";
 import { resolve } from "path";
 
 interface IUser {
+    idUser: string;
     userId: string;
     name: string;
     lastname: string;
     email: string;
     phone: string;
     avatar?: string;
-
+    roleId: number
 }
 
-export const UpdateUserService = async ({ name, lastname, email, phone, avatar, userId }: IUser) => {
+export const UpdateUserService = async ({idUser, name, lastname, email, phone, avatar, userId, roleId }: IUser) => {
     if (!userId) return { message: 'User invalid!' }
     if (!name) return { message: 'Name invalid!' }
     if (!lastname) return { message: 'Lastname invalid!' }
@@ -28,12 +29,21 @@ export const UpdateUserService = async ({ name, lastname, email, phone, avatar, 
         await unlink(resolve(__dirname, '..', '..', '..', 'uploads', avatarAlredyExists.avatar))
     }
 
+    let user;
+    if (roleId && idUser) {
+         user = await Prisma.user.update({
+            data: { name, lastname, email, phone, avatar, roleId },
+            where: { id: idUser },
+            select: { id: true, lastname: true, name: true, email: true, phone: true, avatar: true, roleId: true }
+        })
+    } else {
+         user = await Prisma.user.update({
+            data: { name, lastname, email, phone, avatar },
+            where: { id: userId },
+            select: { id: true, lastname: true, name: true, email: true, phone: true, avatar: true, roleId: true }
+        })
+    }
     
-    const user = await Prisma.user.update({
-        data: { name, lastname, email, phone, avatar },
-        where: { id: userId },
-        select: { id: true, lastname: true, name: true, email: true, phone: true, avatar: true, roleId: true }
-    })
 
     return user
 }
