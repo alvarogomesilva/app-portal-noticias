@@ -9,6 +9,7 @@ import upload from "../config/multer";
 import { AllRoleController } from "../controllers/roles/AllRoleController";
 import { ListAllUserController } from "../controllers/users/ListAllUserController";
 import { ListUniqueUserController } from "../controllers/users/ListUniqueUserController";
+import { DeleteUserController } from "../controllers/users/DeleteUserController";
 
 
 const Route = Router()
@@ -21,7 +22,7 @@ Route.get('/me', auth, new DetailUserController().handle)
 Route.get('/user/:userId', auth, new ListUniqueUserController().handle)
 Route.put('/user', auth, upload.single('avatar'), new UpdateUserController().handle)
 Route.get('/users', auth, new ListAllUserController().handle)
-
+Route.delete('/user/:userId', auth, new DeleteUserController().handle)
 
 // Rotas de Roles
 
