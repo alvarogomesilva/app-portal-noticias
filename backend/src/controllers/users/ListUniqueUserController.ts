@@ -4,10 +4,12 @@ import { ListUniqueUserService } from "../../services/users/ListUniqueUserServic
 export class ListUniqueUserController {
 
     async handle(req: Request, res: Response) {
-        const {userId} = req.params
-        
-        const user = await ListUniqueUserService({userId})
-
-        return res.json(user)
-    } 
+        try {
+            const { userId } = req.params
+            const user = await ListUniqueUserService({ userId })
+            return res.json(user)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }

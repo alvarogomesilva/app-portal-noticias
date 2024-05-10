@@ -5,8 +5,12 @@ import { ListAllUserService } from "../../services/users/ListAllUserService";
 export class ListAllUserController {
 
     async handle(req: Request, res: Response) {
-        const userId = req.userId
-        const users = await ListAllUserService({userId})
-        return res.json(users)
+        try {
+            const userId = req.userId
+            const users = await ListAllUserService({ userId })
+            return res.json(users)
+        } catch (error) {
+            console.log(error)
+        }
     }
 } 
