@@ -4,6 +4,7 @@ import { RootState } from "../../types";
 import { logout } from "../../store/user/action";
 import { AppDispatch } from "../../store/store";
 import { useEffect, useState } from "react";
+import { FaBlog } from "react-icons/fa";
 
 
 export const Navbar = () => {
@@ -26,30 +27,30 @@ export const Navbar = () => {
         dispatch(logout())
     }
     return (
-        <header className="bg-blue-900">
+        <header className="bg-blue-800">
             <nav className="container mx-auto px-6 py-6">
                 <div className="flex items-center justify-between">
                     <div className="text-white font-bold text-xl">
-                        <a href="#">Logo</a>
+                        <Link to="/"><FaBlog size={40} /></Link>
                     </div>
                     <div className="hidden md:block">
                         <ul className="flex items-center space-x-8">
-                            <li><Link to="/" className="text-white">Home</Link></li>
-                            <li><a href="#" className="text-white">Noticias</a></li>
+                            <li><Link to="/" className="text-white hover:text-gray-300">Home</Link></li>
+                            <li><a href="#" className="text-white hover:text-gray-300">Noticias</a></li>
 
-                            <li><a href="#" className="text-white">Contato</a></li>
+                            <li><a href="#" className="text-white hover:text-gray-300">Contato</a></li>
                             {user.roleId === 1
                                 &&
-                                <li ><Link to="/actions" className="text-white">Administrador</Link></li>
+                                <li ><Link to="/actions" className="text-white hover:text-gray-300">Administrador</Link></li>
                             }
                             {user.roleId === 2
                                 &&
-                                <li ><Link to="/actions" className="text-white">Manutenção</Link></li>}
+                                <li ><Link to="/actions" className="text-white hover:text-gray-300">Manutenção</Link></li>}
 
                             {
                                 isAuthenticated ? (
                                     <>
-                                        <li ><Link to="/login" className="text-white" onClick={handleLogout}>Sair</Link></li>
+                                        <li ><Link to="/login" className="text-white hover:text-gray-300" onClick={handleLogout}>Sair</Link></li>
                                         <li>
 
                                             <Link to="/perfil"><div className=" flex flex-col items-center justify-center">

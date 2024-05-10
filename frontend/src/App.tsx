@@ -3,14 +3,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from "./store/user/action";
 import { RootState } from "./types";
+import { AppDispatch } from "./store/store";
+import { getToken } from "./utils";
+
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ScreenLoading } from "./components/ScreenLoading";
 
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
 import AuthPage from "./pages/AuthPage";
-import { AppDispatch } from "./store/store";
-import { ScreenLoading } from "./components/ScreenLoading";
 import ActionPage from "./pages/ActionPage";
-import { ProtectedRoute } from "./components/ProtectedRoute";
 import NewUserPage from "./pages/NewUserPage";
 import EditUserPage from "./pages/EditUserPage";
 import ListUserPage from "./pages/ListUserPage";
@@ -22,11 +24,13 @@ function App() {
 
   useEffect(() => {
     async function checkAuthentication() {
-      const token = localStorage.getItem('@u');
+      const token = getToken()
       if (token) {
         await dispatch(fetchUser());
       }
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
     }
 
     checkAuthentication();
