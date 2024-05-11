@@ -79,7 +79,6 @@ export const updateUsers = (inputs, roleId) => async (dispatch: Dispatch) => {
         Authorization: `Bearer ${token}`
       }
     })
-    console.log('Deu certo!')
   } catch (error) {
     console.log(error)
   }
