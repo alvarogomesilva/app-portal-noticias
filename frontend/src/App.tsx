@@ -16,6 +16,7 @@ import ActionPage from "./pages/ActionPage";
 import NewUserPage from "./pages/NewUserPage";
 import EditUserPage from "./pages/EditUserPage";
 import ListUserPage from "./pages/ListUserPage";
+import NewNoticePage from "./pages/NewNoticePage";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -77,6 +78,13 @@ function App() {
           path="/edit-user/:userId"
           element={<ProtectedRoute element={<EditUserPage />} permissions={[1]} />}
         />
+
+        <Route
+          path="/new-notice"
+          element={<ProtectedRoute element={<NewNoticePage />} permissions={[1]} />}
+        />
+
+
       </Routes>
     </BrowserRouter>
   );
