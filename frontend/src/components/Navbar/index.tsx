@@ -16,7 +16,7 @@ export const Navbar = () => {
 
     useEffect(() => {
         if (user?.avatar) {
-            setAvatar(`http://localhost:3000/files/${user.avatar}`);
+            setAvatar(`http://localhost:3000/files/avatars/${user.avatar}`);
         } else {
             setAvatar("");
         }

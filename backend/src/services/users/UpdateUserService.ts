@@ -18,7 +18,7 @@ export const UpdateUserService = async ({ idUser, name, lastname, email, phone, 
         })
 
         if (avatarAlredyExists.avatar !== null && avatar) {
-            await unlink(resolve(__dirname, '..', '..', '..', 'uploads', avatarAlredyExists.avatar))
+            await unlink(resolve(__dirname, '..', '..', '..', 'uploads', 'avatars', avatarAlredyExists.avatar))
         }
 
         let user;

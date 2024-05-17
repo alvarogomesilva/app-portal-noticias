@@ -11,7 +11,7 @@ export const DeleteUserService = async ({ userId }: { userId: string }) => {
         })
 
         if (user.avatar !== null) {
-            await unlink(resolve(__dirname, '..', '..', '..', 'uploads', user.avatar))
+            await unlink(resolve(__dirname, '..', '..', '..', 'uploads', 'avatars', user.avatar))
         }
         return user
     } catch (error) {

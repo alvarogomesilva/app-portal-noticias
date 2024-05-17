@@ -17,7 +17,7 @@ export class UpdateUserController {
                 const randomName = Math.floor(Math.random() * 999999999) + Date.now();
                 await sharp(req.file.path)
                     .resize(250)
-                    .toFile(`./uploads/${randomName}.${extension}`);
+                    .toFile(`./uploads/avatars/${randomName}.${extension}`);
 
                 avatar = `${randomName}.${extension}`;
                 await unlink(req.file.path);
