@@ -23,3 +23,10 @@ export interface IUpdateUser {
     avatar?: string;
     roleId: number
 }
+
+export interface INew {
+    title: string;
+    description: string;
+    image?: string;
+    userId: string;
+}
