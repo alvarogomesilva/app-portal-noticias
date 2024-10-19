@@ -11,6 +11,7 @@ import { ListAllUserController } from "../controllers/users/ListAllUserControlle
 import { ListUniqueUserController } from "../controllers/users/ListUniqueUserController";
 import { DeleteUserController } from "../controllers/users/DeleteUserController";
 import { CreateNewController } from "../controllers/news/CreateNewController";
+import { ListAllNewController } from "../controllers/news/ListAllNewController";
 
 
 const Route = Router()
@@ -30,7 +31,7 @@ Route.delete('/user/:userId', auth, new DeleteUserController().handle)
 Route.get('/roles', auth, new AllRoleController().handle)
 
 // Rotas de News
-Route.post('/new', auth, new CreateNewController().handle)
-
+Route.post('/new', auth, upload.single('banner'), new CreateNewController().handle)
+Route.get('/news', new ListAllNewController().handle)
 
 export default Route

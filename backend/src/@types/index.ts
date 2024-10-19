@@ -25,6 +25,7 @@ export interface IUpdateUser {
 }
 
 export interface INew {
+    idNew?: string;
     title: string;
     description: string;
     image?: string;

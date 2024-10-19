@@ -1,16 +1,16 @@
 import { Request, Response } from "express";
-import { CreateNewService } from "../../services/news/CreateNewService";
-import sharp from "sharp";
 import { unlink } from "fs/promises";
+import sharp from "sharp";
+import { UpdateNewService } from "../../services/news/UpdateNewService";
 
 sharp.cache(false)
 
-export class CreateNewController {
+export class UpdateNewController {
 
-    async handle(req: Request, res: Response)  {
+    async handle(req: Request, res: Response) {
+
         const userId = req.userId
-        const { title, description } = req.body
-
+        const {idNew, title, description} = req.body
         let banner: string | undefined;
 
         if (req.file) {
@@ -22,13 +22,15 @@ export class CreateNewController {
 
             banner = `${randomName}.${extension}`;
             await unlink(req.file.path);
-        } 
+        }
 
         try {
-            const news = await CreateNewService({ title, description, image: banner, userId })
+            const news = await UpdateNewService({idNew, userId, title, description, image: banner})
             return res.json(news)
         } catch (error) {
             console.log(error)
-        }        
+        }
     }
+
+    
 }
