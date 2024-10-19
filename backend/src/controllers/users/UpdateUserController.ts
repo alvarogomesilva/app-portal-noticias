@@ -3,6 +3,8 @@ import { UpdateUserService } from "../../services/users/UpdateUserService";
 import sharp from "sharp";
 import { unlink } from "fs/promises";
 
+sharp.cache(false)
+
 export class UpdateUserController {
 
     async handle(req: Request, res: Response) {

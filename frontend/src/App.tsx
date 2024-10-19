@@ -81,7 +81,7 @@ function App() {
 
         <Route
           path="/new-notice"
-          element={<ProtectedRoute element={<NewNoticePage />} permissions={[1]} />}
+          element={<ProtectedRoute element={<NewNoticePage />} permissions={[1, 2]} />}
         />
 
 

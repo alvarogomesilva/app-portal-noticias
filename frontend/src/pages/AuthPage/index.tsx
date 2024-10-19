@@ -39,22 +39,22 @@ export default function AuthPage() {
         <>
             <Navbar />
 
-            <div className="w-full bg-gray-50 flex flex-col sm:justify-center items-center pt-9">
+            <div className="w-full flex flex-col sm:justify-center items-center pt-9 px-10">
                 <div className="w-full sm:max-w-sm p-5 mx-auto pt-9 border rounded-md">
                     <h2 className="mb-6 text-center flex justify-center text-3xl font-bold text-blue-900">
                         <FaBlog size={60} />
                     </h2>
                     <form>
-                        <div className="mb-3">
-                            <input id="email" type="text" name="email" className="py-1 px-3  border-0 ring-2 ring-gray-300  focus:ring-blue-600 focus:ring-2 rounded-md mt-1 block w-full"
-                                placeholder="Email"
+                        <div className="my-6">
+                            <input id="email" type="text" name="email" className="py-3 px-3  border-0 ring-2 ring-gray-300 outline-none focus:ring-blue-600 focus:ring-2 rounded-md mt-1 block w-full"
+                                placeholder="Digite seu email"
                                 value={inputs.email}
                                 onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
                             />
                         </div>
-                        <div className="mb-5">
-                            <input id="password" type="password" name="password" className="py-1 px-3  border-0 ring-2 ring-gray-300  focus:ring-blue-600 focus:ring-2 rounded-md mt-1 block w-full"
-                                placeholder="Senha"
+                        <div className="my-6">
+                            <input id="password" type="password" name="password" className="py-3 px-3  border-0 ring-2 ring-gray-300 outline-none focus:ring-blue-600 focus:ring-2 rounded-md mt-1 block w-full"
+                                placeholder="Digite sua senha"
                                 value={inputs.password}
                                 onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
                             />
