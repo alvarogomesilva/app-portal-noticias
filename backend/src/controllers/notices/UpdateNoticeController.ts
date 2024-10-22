@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { unlink } from "fs/promises";
 import sharp from "sharp";
-import { UpdateNewService } from "../../services/news/UpdateNewService";
+import { UpdateNoticeService } from "../../services/notices/UpdateNoticeService";
 
 sharp.cache(false)
 
-export class UpdateNewController {
+export class UpdateNoticeController {
 
     async handle(req: Request, res: Response) {
 
@@ -25,7 +25,7 @@ export class UpdateNewController {
         }
 
         try {
-            const news = await UpdateNewService({idNew, userId, title, description, image: banner})
+            const news = await UpdateNoticeService({idNew, userId, title, description, image: banner})
             return res.json(news)
         } catch (error) {
             console.log(error)

@@ -1,9 +1,9 @@
-import { INew } from "../../@types";
+import { INotice } from "../../@types";
 import { Prisma } from "../../prisma";
 
 
 
-export const CreateNewService = async ({ title, description, image, userId }: INew) => {
+export const CreateNoticeService = async ({ title, description, image, userId }: INotice) => {
     if (!title) return { messageError: 'Title is required!' }
     if (!description) return { messageError: 'Description is required!' }
     if (!userId) return { messageError: 'User invalid!' }

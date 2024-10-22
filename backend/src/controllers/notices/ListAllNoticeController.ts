@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import { ListAllNewService } from "../../services/news/ListAllNewService";
+import { ListAllNoticeService } from "../../services/notices/ListAllNoticeService";
 
-export class ListAllNewController {
+export class ListAllNoticeController {
     async handle(req: Request, res: Response) {
 
         try {
-            const news = await ListAllNewService()
+            const news = await ListAllNoticeService()
             return res.json(news)
         } catch (error) {
             console.log(error)

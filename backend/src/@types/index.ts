@@ -24,7 +24,7 @@ export interface IUpdateUser {
     roleId: number
 }
 
-export interface INew {
+export interface INotice {
     idNew?: string;
     title: string;
     description: string;

@@ -1,6 +1,6 @@
 import { Prisma } from "../../prisma"
 
-export const ListAllNewService = async () => {
+export const ListAllNoticeService = async () => {
 
     try {
         const news = await Prisma.new.findMany({

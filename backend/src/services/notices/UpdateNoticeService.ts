@@ -1,10 +1,10 @@
 import { unlink } from "fs/promises";
-import { INew } from "../../@types";
+import { INotice } from "../../@types";
 import { Prisma } from "../../prisma";
 import { resolve } from "path";
 
 
-export const UpdateNewService = async ({idNew, userId, title, description, image}: INew) => {
+export const UpdateNoticeService = async ({idNew, userId, title, description, image}: INotice) => {
     if (!title) return { messageError: 'Title is required!' }
     if (!description) return { messageError: 'Description is required!' }
     if (!userId) return { messageError: 'User invalid!' }
