@@ -5,6 +5,7 @@ export const ListAllNewService = async () => {
     try {
         const news = await Prisma.new.findMany({
            select: {
+            id: true,
             title: true,
             description: true,
             image: true,

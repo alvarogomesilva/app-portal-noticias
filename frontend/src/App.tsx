@@ -17,6 +17,8 @@ import NewUserPage from "./pages/NewUserPage";
 import EditUserPage from "./pages/EditUserPage";
 import ListUserPage from "./pages/ListUserPage";
 import NewNoticePage from "./pages/NewNoticePage";
+import { ListNoticesPage } from "./pages/ListNoticesPage";
+import { EditNoticePage } from "./pages/EditNoticePage";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -82,6 +84,14 @@ function App() {
         <Route
           path="/new-notice"
           element={<ProtectedRoute element={<NewNoticePage />} permissions={[1, 2]} />}
+        />
+        <Route
+          path="/list-notice"
+          element={<ProtectedRoute element={<ListNoticesPage />} permissions={[1, 2]} />}
+        />
+        <Route
+          path="/edit-notice/:noticeId"
+          element={<ProtectedRoute element={<EditNoticePage />} permissions={[1, 2]} />}
         />
 
 

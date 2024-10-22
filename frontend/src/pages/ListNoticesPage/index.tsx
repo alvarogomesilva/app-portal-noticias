@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Navbar } from "../../components/Navbar";
 import { api } from "../../api";
-
+import { Navbar } from "../../components/Navbar"
+import { Link } from "react-router-dom";
 
 interface Notice {
     id: string;
@@ -14,9 +14,8 @@ interface Notice {
     };
 }
 
-export default function HomePage() {
+export function ListNoticesPage() {
     const [news, setNews] = useState<Notice[]>([])
-
 
     useEffect(() => {
         async function fetchNews() {
@@ -29,20 +28,18 @@ export default function HomePage() {
         }
 
         fetchNews();
-    }, []); 
+    }, []);
 
     return (
         <>
             <Navbar />
-
             <div className="grid grid-cols-3 gap-4 max-w-5xl mx-auto mt-10">
-
                 {news.length > 0 ? (
                     news.map((notice) => (
 
-                        <div 
-                        key={notice.id}
-                        className="flex flex-col justify-between max-w-sm mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
+                        <div
+                            key={notice.id}
+                            className="flex flex-col justify-between max-w-sm mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
 
                             <img className="w-full h-56 object-cover" src={`http://localhost:3000/files/banners/${notice.image}`} alt="Imagem do Card" />
 
@@ -53,23 +50,23 @@ export default function HomePage() {
                             </div>
 
                             <div className="p-4">
-                                <div className="flex items-center">
-                                    <img className="w-10 h-10 rounded-full mr-4" src={`http://localhost:3000/files/avatars/${notice.user.avatar}`} alt="Avatar of Jonathan Reinink" />
-                                        <div className="text-sm">
-                                            <p className="text-gray-900 leading-none">{notice.user.name}</p>
-                                            <p className="text-gray-600">Aug 18</p>
-                                        </div>
+
+                                <div className="flex mt-4 md:mt-6">
+                                    <Link to={`/edit-notice/${notice.id}`} className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:outline-none dark:bg-blue-600 dark:hover:bg-blue-700" >Atualizar</Link>
+
+                                    <button
+
+                                        className="py-2 px-4 ms-2 text-sm font-medium text-white focus:outline-none bg-red-500 rounded-lg border border-gray-200 hover:bg-red-700  focus:z-10 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Deletar</button>
                                 </div>
                             </div>
                         </div>
-
-
 
                     ))
                 ) : (
                     <h1>Nenhuma notícia cadastrada!</h1>
                 )}
+
             </div>
         </>
-    );
+    )
 }
