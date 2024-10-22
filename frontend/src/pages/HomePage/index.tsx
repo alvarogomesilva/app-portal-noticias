@@ -15,14 +15,14 @@ interface Notice {
 }
 
 export default function HomePage() {
-    const [news, setNews] = useState<Notice[]>([])
+    const [notices, setNotices] = useState<Notice[]>([])
 
 
     useEffect(() => {
         async function fetchNews() {
             try {
-                const request = await api.get('/news');
-                setNews(request.data)
+                const request = await api.get('/notices');
+                setNotices(request.data)
             } catch (error) {
                 console.log("Erro ao carregar notícias:", error);
             }
@@ -37,8 +37,8 @@ export default function HomePage() {
 
             <div className="grid grid-cols-3 gap-4 max-w-5xl mx-auto mt-10">
 
-                {news.length > 0 ? (
-                    news.map((notice) => (
+                {notices.length > 0 ? (
+                    notices.map((notice) => (
 
                         <div 
                         key={notice.id}

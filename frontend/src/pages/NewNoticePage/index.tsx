@@ -3,7 +3,7 @@ import { Navbar } from "../../components/Navbar";
 import { SubmitLoading } from "../../components/SubmitLoading";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { createNew } from "../../store/new/action";
+import { createNotice } from "../../store/notice/action";
 import toast from "react-hot-toast";
 
 export default function NewNoticePage() {
@@ -56,7 +56,7 @@ export default function NewNoticePage() {
 
         try {
             // Dispatch para o Redux, passando o formData
-            await dispatch(createNew(formData));
+            await dispatch(createNotice(formData));
             toast.success("Atualizado com sucesso!");
         } catch (error) {
             console.error('Erro ao atualizar:', error);

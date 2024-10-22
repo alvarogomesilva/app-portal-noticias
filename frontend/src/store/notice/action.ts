@@ -1,12 +1,12 @@
 import { Dispatch } from "redux";
 import { api } from "../../api";
-import { getToken } from "../../utils";
+import { getToken } from "../../utils/getToken";
 
-export const createNew = (formData: FormData) => async (dispatch: Dispatch) => {
+export const createNotice = (formData: FormData) => async (dispatch: Dispatch) => {
     try {
         const token = getToken()
 
-        await api.post('/new', formData, {
+        await api.post('/notice', formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'multipart/form-data'

@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 const initialState = {
-    news: []
+    notices: []
 }
 
-const newSlice = createSlice({
-    name: 'new',
+const noticeSlice = createSlice({
+    name: 'notices',
     initialState,
 
     reducers: {
@@ -14,4 +14,4 @@ const newSlice = createSlice({
     },
 })
 
-export default newSlice.reducer
+export default noticeSlice.reducer

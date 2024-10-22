@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchUser } from "./store/user/action";
 import { RootState } from "./types";
 import { AppDispatch } from "./store/store";
-import { getToken } from "./utils";
+import { getToken } from "./utils/getToken";
 
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ScreenLoading } from "./components/ScreenLoading";
 
 import ProfilePage from "./pages/ProfilePage";
 import HomePage from "./pages/HomePage";
-import AuthPage from "./pages/AuthPage";
+import { LoginPage } from "./pages/LoginPage";
 import ActionPage from "./pages/ActionPage";
 import NewUserPage from "./pages/NewUserPage";
 import EditUserPage from "./pages/EditUserPage";
@@ -47,15 +47,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route 
-          path="/" 
-          element={<HomePage />} 
-        
+        <Route
+          path="/"
+          element={<HomePage />}
+
         />
-        <Route 
-          path="/login" 
-            element={user.isAuthenticated ? <Navigate to="/" /> : <AuthPage />} 
-          />
+        <Route
+          path="/login"
+          element={user.isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
+        />
 
         <Route
           path="/perfil"

@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { setToken, clearToken, setIsAutenticated, setUser } from './reducer';
 import { api } from '../../api';
 import { TLogin } from '../../types';
-import { getToken } from '../../utils';
+import { getToken } from '../../utils/getToken';
 
 export const login = (inputs: TLogin) => async (dispatch: Dispatch) => {
   try {

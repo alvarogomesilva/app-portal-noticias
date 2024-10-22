@@ -1,11 +1,11 @@
 
 import { combineReducers } from '@reduxjs/toolkit';
 import userReducer from './user/reducer';
-import newReducer from './new/reducer';
+import noticeReducer from './notice/reducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
-  new: newReducer
+  notice: noticeReducer
 });
 
 export default rootReducer;
