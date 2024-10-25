@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api, BASE_URL } from "../../api";
 import { Navbar } from "../../components/Navbar"
 import { Link } from "react-router-dom";
+import { getToken } from "../../utils/getToken";
 
 interface Notice {
     id: string;
@@ -20,8 +21,13 @@ export function ListNoticesPage() {
     // Carrega todas as notices
     useEffect(() => {
         async function fetchNews() {
+            const token = getToken()
             try {
-                const request = await api.get('/notices');
+                const request = await api.get('/notices/user', {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
                 setNotices(request.data)
                 
             } catch (error) {

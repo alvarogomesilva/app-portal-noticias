@@ -16,6 +16,7 @@ import { ListAllNoticeController } from "../controllers/notices/ListAllNoticeCon
 import { ListOneNoticeService } from "../services/notices/ListOneNoticeService";
 import { ListOneNoticeController } from "../controllers/notices/ListOneNoticeController";
 import { UpdateNoticeController } from "../controllers/notices/UpdateNoticeController";
+import { ListByUserNoticeController } from "../controllers/notices/ListByUserNoticeController";
 
 
 const Route = Router()
@@ -36,6 +37,7 @@ Route.get('/roles', auth, new AllRoleController().handle)
 // Rotas de Notices
 Route.post('/notice', auth, upload.single('banner'), new CreateNoticeController().handle)
 Route.get('/notices', new ListAllNoticeController().handle)
+Route.get('/notices/user', auth, new ListByUserNoticeController().handle)
 Route.get('/notice/:id', auth, new ListOneNoticeController().handle)
 
 Route.put('/notice', auth, upload.single('banner'), new UpdateNoticeController().handle)
