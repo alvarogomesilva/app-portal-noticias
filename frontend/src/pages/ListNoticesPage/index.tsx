@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api } from "../../api";
+import { api, BASE_URL } from "../../api";
 import { Navbar } from "../../components/Navbar"
 import { Link } from "react-router-dom";
 
@@ -15,13 +15,15 @@ interface Notice {
 }
 
 export function ListNoticesPage() {
-    const [news, setNews] = useState<Notice[]>([])
+    const [notices, setNotices] = useState<Notice[]>([])
 
+    // Carrega todas as notices
     useEffect(() => {
         async function fetchNews() {
             try {
-                const request = await api.get('/news');
-                setNews(request.data)
+                const request = await api.get('/notices');
+                setNotices(request.data)
+                
             } catch (error) {
                 console.log("Erro ao carregar notícias:", error);
             }
@@ -34,14 +36,14 @@ export function ListNoticesPage() {
         <>
             <Navbar />
             <div className="grid grid-cols-3 gap-4 max-w-5xl mx-auto mt-10">
-                {news.length > 0 ? (
-                    news.map((notice) => (
+                {notices.length > 0 ? (
+                    notices.map((notice) => (
 
                         <div
                             key={notice.id}
                             className="flex flex-col justify-between max-w-sm mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
 
-                            <img className="w-full h-56 object-cover" src={`http://localhost:3000/files/banners/${notice.image}`} alt="Imagem do Card" />
+                            <img className="w-full h-56 object-cover" src={`${BASE_URL}/files/banners/${notice.image}`} alt="Imagem do Card" />
 
 
                             <div className="p-4">

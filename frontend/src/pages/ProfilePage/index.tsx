@@ -6,13 +6,14 @@ import { AppDispatch } from "../../store/store";
 import { updateUser } from "../../store/user/action";
 import { SubmitLoading } from "../../components/SubmitLoading";
 import toast from "react-hot-toast";
+import { usePreviewImage } from "../../hooks/usePreviewImage";
+import { BASE_URL } from "../../api";
 
 export default function ProfilePage() {
     const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((state: RootState) => state.user.currentUser);
     const ref = useRef<HTMLInputElement>(null);
-    const [photoProfile, setPhotoProfile] = useState<string | null>(null);
-    const [avatar, setAvatar] = useState<File | null>(null);
+    const { image, preview, previewImage } = usePreviewImage()
     const [inputs, setInputs] = useState({
         name: user?.name || "",
         lastname: user?.lastname || "",
@@ -22,19 +23,6 @@ export default function ProfilePage() {
     });
     const [isUpdating, setIsUpdating] = useState(false);
 
-    const previewProfile = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        setAvatar(file)
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setPhotoProfile(reader.result as string);
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-    };
 
     const handleUpdateUser = async (e: FormEvent) => {
         e.preventDefault();
@@ -45,8 +33,8 @@ export default function ProfilePage() {
         formData.append('lastname', inputs.lastname);
         formData.append('email', inputs.email);
         formData.append('phone', inputs.phone);
-        if (avatar) {
-            formData.append('avatar', avatar);
+        if (preview) {
+            formData.append('avatar', preview);
         }
 
         try {
@@ -70,12 +58,12 @@ export default function ProfilePage() {
                                 type="file"
                                 className="hidden"
                                 ref={ref}
-                                onChange={previewProfile}
+                                onChange={previewImage}
                             />
                             <img
                                 src={
-                                    photoProfile ||
-                                    (inputs.avatar !== null ? `http://localhost:3000/files/avatars/${user?.avatar}` : null) ||
+                                    image ||
+                                    (inputs.avatar !== null ? `${BASE_URL}/files/avatars/${user?.avatar}` : null) ||
                                     "https://images.unsplash.com/photo-1531316282956-d38457be0993?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80"
                                 }
                                 alt="Profile"

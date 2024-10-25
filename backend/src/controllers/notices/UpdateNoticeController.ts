@@ -12,7 +12,7 @@ export class UpdateNoticeController {
         const userId = req.userId
         const {idNew, title, description} = req.body
         let banner: string | undefined;
-
+        
         if (req.file) {
             const extension = req.file.mimetype.substring(6);
             const randomName = Math.floor(Math.random() * 999999999) + Date.now();
