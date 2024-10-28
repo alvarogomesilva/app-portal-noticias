@@ -54,7 +54,7 @@ export function ListNoticesPage() {
 
                             <div className="p-4">
                                 <h2 className="text-xl font-bold text-gray-800">{notice.title}</h2>
-                                <p className="text-gray-500 mt-2">{notice.description}</p>
+                                <p className="text-gray-500 text-sm mt-2">{notice.description}</p>
                             </div>
 
                             <div className="p-4">

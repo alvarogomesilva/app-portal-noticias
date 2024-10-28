@@ -36,8 +36,7 @@ export const Navbar = () => {
                     </div>
                     <div className="hidden md:block">
                         <ul className="flex items-center space-x-8">
-                            <li><a href="/" className="text-white hover:text-gray-300">Home</a></li>
-                            <li><Link to="/" className="text-white hover:text-gray-300">Ultimas Notícias</Link></li>
+                            <li><Link to="/" className="text-white hover:text-gray-300">Notícias</Link></li>
 
                             <li><a href="#" className="text-white hover:text-gray-300">Contato</a></li>
                             {user.roleId === 1

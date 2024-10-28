@@ -4,6 +4,11 @@ export const ListAllNoticeService = async () => {
 
     try {
         const news = await Prisma.new.findMany({
+            orderBy: [
+                {
+                    createdAt: 'desc'
+                }
+            ],
            select: {
             id: true,
             title: true,
