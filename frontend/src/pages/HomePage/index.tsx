@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import { api } from "../../api";
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 
 interface Notice {
@@ -12,11 +14,12 @@ interface Notice {
         name: string;
         avatar: string;
     };
+    createdAt: Date;
 }
 
 export default function HomePage() {
     const [notices, setNotices] = useState<Notice[]>([])
-
+    const date = new Date()
 
     useEffect(() => {
         async function fetchNews() {
@@ -35,7 +38,7 @@ export default function HomePage() {
         <>
             <Navbar />
 
-            <div className="grid grid-cols-3 gap-4 max-w-5xl mx-auto mt-10 mb-10">
+            <div className="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3  gap-4 max-w-5xl mx-auto mt-10 mb-10 px-4">
 
                 {notices.length > 0 ? (
                     notices.map((notice) => (
@@ -57,7 +60,10 @@ export default function HomePage() {
                                     <img className="w-10 h-10 rounded-full mr-4" src={`http://localhost:3000/files/avatars/${notice.user.avatar}`} alt="Avatar of Jonathan Reinink" />
                                         <div className="text-sm">
                                             <p className="text-gray-900 leading-none">{notice.user.name}</p>
-                                            <p className="text-gray-600">Aug 18</p>
+                                            <p className="text-gray-600">
+                                                {format(notice.createdAt, 'dd/MM/yyyy', { locale: ptBR })
+                                            }
+                                            </p>
                                         </div>
                                 </div>
                             </div>

@@ -63,7 +63,7 @@ export const Navbar = () => {
 
                                     </>
                                 ) : (
-                                    <li className="border-2 px-4 py-1 rounded"><Link to="/login" className="text-white">Login</Link></li>
+                                    <Link to="/login" className="border-2 px-4 py-1 rounded"><span  className="text-white">Login</span></Link>
                                 )
                             }
                         </ul>
