@@ -38,7 +38,7 @@ export default function HomePage() {
         <>
             <Navbar />
 
-            <div className="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3  gap-4 max-w-5xl mx-auto mt-10 mb-10 px-4">
+            <div className="grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 gap-4 max-w-5xl mx-auto mt-10 mb-10 px-4">
 
                 {notices.length > 0 ? (
                     notices.map((notice) => (
