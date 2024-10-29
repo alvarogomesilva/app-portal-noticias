@@ -23,13 +23,12 @@ export function ListNoticesPage() {
         async function fetchNews() {
             const token = getToken()
             try {
-                const request = await api.get('/notices/user', {
+                const request = await api.get('/news', {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
                 setNotices(request.data)
-                
             } catch (error) {
                 console.log("Erro ao carregar notícias:", error);
             }

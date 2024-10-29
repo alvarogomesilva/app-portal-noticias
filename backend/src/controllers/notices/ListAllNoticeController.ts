@@ -3,9 +3,10 @@ import { ListAllNoticeService } from "../../services/notices/ListAllNoticeServic
 
 export class ListAllNoticeController {
     async handle(req: Request, res: Response) {
+        const { page } = req.params
 
         try {
-            const news = await ListAllNoticeService()
+            const news = await ListAllNoticeService({page})
             return res.json(news)
         } catch (error) {
             console.log(error)

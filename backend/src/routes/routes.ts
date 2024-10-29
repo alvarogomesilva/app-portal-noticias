@@ -36,8 +36,8 @@ Route.get('/roles', auth, new AllRoleController().handle)
 
 // Rotas de Notices
 Route.post('/notice', auth, upload.single('banner'), new CreateNoticeController().handle)
-Route.get('/notices', new ListAllNoticeController().handle)
-Route.get('/notices/user', auth, new ListByUserNoticeController().handle)
+Route.get('/notices/:page', new ListAllNoticeController().handle)
+Route.get('/news', auth, new ListByUserNoticeController().handle)
 Route.get('/notice/:id', auth, new ListOneNoticeController().handle)
 
 Route.put('/notice', auth, upload.single('banner'), new UpdateNoticeController().handle)
