@@ -17,6 +17,7 @@ import { ListOneNoticeService } from "../services/notices/ListOneNoticeService";
 import { ListOneNoticeController } from "../controllers/notices/ListOneNoticeController";
 import { UpdateNoticeController } from "../controllers/notices/UpdateNoticeController";
 import { ListByUserNoticeController } from "../controllers/notices/ListByUserNoticeController";
+import { DeleteNoticeController } from "../controllers/notices/DeleteNoticeController";
 
 
 const Route = Router()
@@ -39,6 +40,8 @@ Route.post('/notice', auth, upload.single('banner'), new CreateNoticeController(
 Route.get('/notices/:page', new ListAllNoticeController().handle)
 Route.get('/news', auth, new ListByUserNoticeController().handle)
 Route.get('/notice/:id', auth, new ListOneNoticeController().handle)
+
+Route.delete('/notice/:id', auth, new DeleteNoticeController().handle)
 
 Route.put('/notice', auth, upload.single('banner'), new UpdateNoticeController().handle)
 
