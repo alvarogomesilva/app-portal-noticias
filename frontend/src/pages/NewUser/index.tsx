@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from "react"
 import { Navbar } from "../../components/Navbar"
-import { api } from "../../api"
+import { api } from "../../services/api"
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
 import { createUser } from "../../store/user/action";
@@ -12,7 +12,7 @@ type Roles = {
     type: string;
 }
 
-export default function NewUserPage() {
+export const NewUser = () => {
     const dispatch = useDispatch<AppDispatch>()
     const [roles, setRoles] = useState<Roles[] | []>([])
     const [selectedRole, setSelectedRole] = useState<number | null>(null)

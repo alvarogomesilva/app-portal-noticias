@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { api } from "../../api";
+import { api } from "../../services/api";
 import { getToken } from "../../utils/getToken";
 
 export const createNotice = (formData: FormData) => async (dispatch: Dispatch) => {

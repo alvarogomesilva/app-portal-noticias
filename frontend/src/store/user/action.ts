@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 import { setToken, clearToken, setIsAutenticated, setUser } from './reducer';
-import { api } from '../../api';
+import { api } from '../../services/api';
 import { TLogin } from '../../types';
 import { getToken } from '../../utils/getToken';
 

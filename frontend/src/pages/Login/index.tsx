@@ -4,7 +4,7 @@ import { SubmitLoading } from "../../components/SubmitLoading";
 import { useLogin } from "../../hooks/useLogin";
 
 
-export function LoginPage() {
+export const Login = () => {
     const { inputs, setInputs, handleLogin, loading } = useLogin();
 
     return (

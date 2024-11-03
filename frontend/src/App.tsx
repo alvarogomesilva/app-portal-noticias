@@ -9,16 +9,16 @@ import { getToken } from "./utils/getToken";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { ScreenLoading } from "./components/ScreenLoading";
 
-import ProfilePage from "./pages/ProfilePage";
-import HomePage from "./pages/HomePage";
-import { LoginPage } from "./pages/LoginPage";
-import ActionPage from "./pages/ActionPage";
-import NewUserPage from "./pages/NewUserPage";
-import EditUserPage from "./pages/EditUserPage";
-import ListUserPage from "./pages/ListUserPage";
-import NewNoticePage from "./pages/NewNoticePage";
-import { ListNoticesPage } from "./pages/ListNoticesPage";
-import { EditNoticePage } from "./pages/EditNoticePage";
+import { Profile } from "./pages/Profile";
+import { Home } from "./pages/Home";
+import { Login } from "./pages/Login";
+import { Action } from "./pages/Action";
+import { NewUser } from "./pages/NewUser";
+import { EditUser } from "./pages/EditUser";
+import { ListUser } from "./pages/ListUser";
+import { NewNotice } from "./pages/NewNotice";
+import { ListNotices } from "./pages/ListNotices";
+import { EditNotice } from "./pages/EditNotice";
 
 function App() {
   const dispatch = useDispatch<AppDispatch>();
@@ -49,49 +49,49 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<HomePage />}
+          element={<Home />}
 
         />
         <Route
           path="/login"
-          element={user.isAuthenticated ? <Navigate to="/" /> : <LoginPage />}
+          element={user.isAuthenticated ? <Navigate to="/" /> : <Login />}
         />
 
         <Route
           path="/perfil"
-          element={user.isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />}
+          element={user.isAuthenticated ? <Profile /> : <Navigate to="/login" />}
         />
 
         <Route
           path="/actions"
-          element={<ProtectedRoute element={<ActionPage />} permissions={[1, 2]} />}
+          element={<ProtectedRoute element={<Action />} permissions={[1, 2]} />}
         />
         <Route
           path="/new-user"
-          element={<ProtectedRoute element={<NewUserPage />} permissions={[1]} />}
+          element={<ProtectedRoute element={<NewUser />} permissions={[1]} />}
         />
 
         <Route
           path="/list-user"
-          element={<ProtectedRoute element={<ListUserPage />} permissions={[1]} />}
+          element={<ProtectedRoute element={<ListUser />} permissions={[1]} />}
         />
 
         <Route
           path="/edit-user/:userId"
-          element={<ProtectedRoute element={<EditUserPage />} permissions={[1]} />}
+          element={<ProtectedRoute element={<EditUser />} permissions={[1]} />}
         />
 
         <Route
           path="/new-notice"
-          element={<ProtectedRoute element={<NewNoticePage />} permissions={[1, 2]} />}
+          element={<ProtectedRoute element={<NewNotice />} permissions={[1, 2]} />}
         />
         <Route
           path="/list-notice"
-          element={<ProtectedRoute element={<ListNoticesPage />} permissions={[1, 2]} />}
+          element={<ProtectedRoute element={<ListNotices />} permissions={[1, 2]} />}
         />
         <Route
           path="/edit-notice/:noticeId"
-          element={<ProtectedRoute element={<EditNoticePage />} permissions={[1, 2]} />}
+          element={<ProtectedRoute element={<EditNotice />} permissions={[1, 2]} />}
         />
 
 

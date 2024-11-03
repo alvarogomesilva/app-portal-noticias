@@ -7,9 +7,9 @@ import { updateUser } from "../../store/user/action";
 import { SubmitLoading } from "../../components/SubmitLoading";
 import toast from "react-hot-toast";
 import { usePreviewImage } from "../../hooks/usePreviewImage";
-import { BASE_URL } from "../../api";
+import { BASE_URL } from "../../services/api";
 
-export default function ProfilePage() {
+export const Profile = () => {
     const dispatch = useDispatch<AppDispatch>();
     const user = useSelector((state: RootState) => state.user.currentUser);
     const ref = useRef<HTMLInputElement>(null);

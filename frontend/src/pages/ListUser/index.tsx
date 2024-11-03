@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Navbar } from "../../components/Navbar";
 import { useEffect, useState } from "react";
-import { api } from "../../api";
+import { api } from "../../services/api";
 import { Link } from "react-router-dom";
 import { deleteUser } from "../../store/user/action";
 import { AppDispatch } from "../../store/store";
@@ -19,7 +19,7 @@ type TUsers = {
     roleId: number;
 };
 
-export default function ListUserPage() {
+export const ListUser = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [users, setUsers] = useState<TUsers[]>([]);
 

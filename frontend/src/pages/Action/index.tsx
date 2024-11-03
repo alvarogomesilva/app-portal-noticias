@@ -3,7 +3,7 @@ import { Navbar } from "../../components/Navbar"
 import { RootState } from "../../types"
 import { Link } from "react-router-dom"
 
-export default function ActionPage() {
+export const Action = () => {
     const roleId = useSelector((state: RootState) => state.user.currentUser.roleId)
 
 

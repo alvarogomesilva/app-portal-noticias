@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navbar } from "../../components/Navbar";
-import { api } from "../../api";
+import { api } from "../../services/api";
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -16,7 +16,7 @@ interface Notice {
     createdAt: Date;
 }
 
-export default function HomePage() {
+export const Home = () => {
     const [notices, setNotices] = useState<Notice[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);

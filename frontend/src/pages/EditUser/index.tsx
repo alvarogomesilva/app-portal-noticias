@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { Navbar } from "../../components/Navbar";
 import { useParams } from 'react-router-dom';
-import { api } from "../../api";
+import { api } from "../../services/api";
 import { updateUsers } from "../../store/user/action";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
@@ -12,7 +12,7 @@ type Roles = {
     type: string;
 }
 
-export default function EditUserPage() {
+export const EditUser = () => {
     const dispatch = useDispatch<AppDispatch>()
     const { userId } = useParams()
     const [roles, setRoles] = useState<Roles[]>([])

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getToken } from "../utils/getToken"
-import { api } from "../api"
+import { api } from "../services/api"
 
 interface Notice {
     id: number;

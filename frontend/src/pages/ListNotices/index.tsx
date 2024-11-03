@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { api, BASE_URL } from "../../api";
+import { api, BASE_URL } from "../../services/api";
 import { Navbar } from "../../components/Navbar";
 import { Link } from "react-router-dom";
 import { getToken } from "../../utils/getToken";
@@ -16,7 +16,7 @@ interface Notice {
     };
 }
 
-export function ListNoticesPage() {
+export const ListNotices = () => {
     const [notices, setNotices] = useState<Notice[]>([]);
     const [isShowDialog, setIsShowDialog] = useState(false);
     const [selectedNoticeId, setSelectedNoticeId] = useState<string | null>(null);
