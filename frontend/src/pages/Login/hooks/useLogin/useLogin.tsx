@@ -3,10 +3,11 @@ import { useDispatch } from "react-redux";
 
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
-import { AppDispatch } from "../store/store";
-import { login } from "../store/user/action";
+import { AppDispatch } from "../../../../store/store";
+import { login } from "../../../../store/user/action";
 
-export function useLogin() {
+
+const useLogin = () => {
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -39,3 +40,5 @@ export function useLogin() {
         loading,
     };
 }
+
+export default useLogin;

@@ -1,10 +1,10 @@
 import { Navbar } from "../../components/Navbar";
 import { FaBlog } from "react-icons/fa";
 import { SubmitLoading } from "../../components/SubmitLoading";
-import { useLogin } from "../../hooks/useLogin";
+import useLogin from "./hooks/useLogin";
 
 
-export const Login = () => {
+const Login = () => {
     const { inputs, setInputs, handleLogin, loading } = useLogin();
 
     return (
@@ -52,3 +52,5 @@ export const Login = () => {
         </>
     );
 }
+
+export default Login;
