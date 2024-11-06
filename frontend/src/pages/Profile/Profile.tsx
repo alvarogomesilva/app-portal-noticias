@@ -1,51 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navbar } from "../../components/Navbar";
 import { RootState } from "../../types";
-import { FormEvent, useRef, useState } from "react";
-import { AppDispatch } from "../../store/store";
-import { updateUser } from "../../store/user/action";
+import { useRef } from "react";
+
 import { SubmitLoading } from "../../components/SubmitLoading";
-import toast from "react-hot-toast";
+
 import { usePreviewImage } from "../../hooks/usePreviewImage";
 import { BASE_URL } from "../../services/api";
+import useUpdateUser from "./hooks";
 
-export const Profile = () => {
-    const dispatch = useDispatch<AppDispatch>();
+const Profile = () => {
     const user = useSelector((state: RootState) => state.user.currentUser);
     const ref = useRef<HTMLInputElement>(null);
     const { image, preview, previewImage } = usePreviewImage()
-    const [inputs, setInputs] = useState({
-        name: user?.name || "",
-        lastname: user?.lastname || "",
-        email: user?.email || "",
-        phone: user?.phone || "",
-        avatar: user?.avatar
-    });
-    const [isUpdating, setIsUpdating] = useState(false);
-
-
-    const handleUpdateUser = async (e: FormEvent) => {
-        e.preventDefault();
-        setIsUpdating(true);
-
-        const formData = new FormData();
-        formData.append('name', inputs.name);
-        formData.append('lastname', inputs.lastname);
-        formData.append('email', inputs.email);
-        formData.append('phone', inputs.phone);
-        if (preview) {
-            formData.append('avatar', preview);
-        }
-
-        try {
-            await dispatch(updateUser(formData));
-            toast.success("Atualizado com sucesso!")
-        } catch (error) {
-            console.error('Erro ao atualizar usuário:', error);
-        } finally {
-            setIsUpdating(false);
-        }
-    }
+    const { handleUpdateUser, inputs, isLoading, setInputs } = useUpdateUser(preview)
 
     return (
         <>
@@ -126,11 +94,13 @@ export const Profile = () => {
                 <button
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700"
                     onClick={handleUpdateUser}
-                    disabled={isUpdating}
+                    disabled={isLoading}
                 >
-                    {isUpdating ? <SubmitLoading /> : 'Atualizar'}
+                    {isLoading ? <SubmitLoading /> : 'Atualizar'}
                 </button>
             </form>
         </>
     );
 }
+
+export default Profile
